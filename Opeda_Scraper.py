@@ -22,6 +22,7 @@ class Opeda_Scraper:
     def __init__(self, url, download_dir):
         self.url = url
         self.download_dir = download_dir
+        # self.temp_dir = temp_dir
         
         self.clear_download_dir()
         self.options = webdriver.ChromeOptions()
@@ -64,6 +65,15 @@ class Opeda_Scraper:
         original_file = os.path.join(self.download_dir, "grid.csv")
         new_file = os.path.join(self.download_dir, f"{prod}.csv")
         os.rename(original_file, new_file)
+
+        
+
+        if hasattr(self, 'data'):
+            csv_df = pd.read_csv(new_file)
+            self.data = pd.concat([self.data, csv_df], ignore_index=True)  
+        else:
+            self.data = pd.read_csv(new_file)
+       
 
     def close_driver(self):
         self.driver.quit()
