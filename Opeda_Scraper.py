@@ -14,14 +14,17 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 
 
-# download_dir = r"C:\Users\dagarcia\Downloads"
-# temp_dir = r"D:\Python\PDE_Weekly\Temp"
+download_dir = r"C:\Users\dagarcia\Downloads"
+temp_dir = r"D:\Python\PDE_Weekly\Temp"
 
 class Opeda_Scraper:
     
     def __init__(self, url, download_dir):
         self.url = url
         self.download_dir = download_dir
+        
+        if not os.path.exists(download_dir):
+            os.makedirs(download_dir)        
         # self.temp_dir = temp_dir
         
         self.clear_download_dir()
@@ -79,9 +82,9 @@ class Opeda_Scraper:
         self.driver.quit()
         
 
-# opeda = Opeda_Scraper(r"https:\\opeda.intel.com\binsplit", temp_dir)
+opeda = Opeda_Scraper(r"https:\\opeda.intel.com\binsplit", temp_dir)
 
-# opeda.pull_product_data('PQFCV')
+opeda.pull_product_data('PQFCV')
 # opeda.pull_product_data('PQGCV')
 
 
